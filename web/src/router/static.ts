@@ -18,10 +18,19 @@ const staticRoutes: Array<RouteRecordRaw> = [
         },
     },
     {
-        // 首页
+        // 购物中心
         path: '/product',
         name: 'product',
         component: () => import('/@/views/frontend/product/index.vue'),
+        meta: {
+            title: pageTitle('product'),
+        },
+    },
+    {
+        // 购物车
+        path: '/car',
+        name: 'car',
+        component: () => import('/@/views/frontend/car/index.vue'),
         meta: {
             title: pageTitle('product'),
         },
