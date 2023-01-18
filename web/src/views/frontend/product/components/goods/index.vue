@@ -6,7 +6,9 @@
             <p class="describe">{{ info.describe }}</p>
             <p class="count">剩余数量：{{ info.count }}</p>
             <div class="operation">
-                <el-button type="danger" @click="handleJoin"> 加入购物车 </el-button>
+                <el-button type="danger" :disabled="info.count === 0" @click="handleJoin">
+                    {{ info.count === 0 ? '补货中' : '加入购物车' }}
+                </el-button>
             </div>
         </div>
     </div>
@@ -16,6 +18,7 @@
 import { onMounted } from '@vue/runtime-core'
 import GoodsImg from '/@/assets/product/product.jpg'
 import { useCartInfo } from '/@/stores/cart'
+import { useProductInfo } from '/@/stores/product'
 
 interface ProductProps {
     info: {
@@ -28,8 +31,17 @@ interface ProductProps {
 }
 const props = defineProps<ProductProps>()
 const cartInfo = useCartInfo()
+const productInfo = useProductInfo()
 const handleJoin = () => {
-    cartInfo.cartList.push({ ...props.info, count: 1, imgUrl: props.info.imgUrl })
+    console.log('123123123123')
+    const index = cartInfo.cartList.findIndex((item) => item.id === props.info.id)
+    if (index >= 0) {
+        cartInfo.cartList[index].count++
+    } else {
+        cartInfo.cartList.push({ ...props.info, count: 1, imgUrl: props.info.imgUrl })
+    }
+    const productIndex = productInfo.productList.findIndex((item) => item.id === props.info.id)
+    productInfo.productList[productIndex].count--
 }
 onMounted(() => {
     console.log(props)
