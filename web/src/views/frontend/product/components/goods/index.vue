@@ -34,14 +34,14 @@ const cartInfo = useCartInfo()
 const productInfo = useProductInfo()
 const handleJoin = () => {
     console.log('123123123123')
-    const index = cartInfo.cartList.findIndex((item) => item.id === props.info.id)
-    if (index >= 0) {
-        cartInfo.cartList[index].count++
+    const data = cartInfo.cartList.find((item) => item.id === props.info.id)
+    if (data) {
+        data.count++
     } else {
         cartInfo.cartList.push({ ...props.info, count: 1, imgUrl: props.info.imgUrl })
     }
-    const productIndex = productInfo.productList.findIndex((item) => item.id === props.info.id)
-    productInfo.productList[productIndex].count--
+    const productData = productInfo.productList.find((item) => item.id === props.info.id)
+    productData && productData.count--
 }
 onMounted(() => {
     console.log(props)
