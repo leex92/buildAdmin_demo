@@ -2,9 +2,33 @@
     <div>
         <Header />
         <el-container class="container">
-            <el-main class="main">
-                <div class="main-container">我是购物车</div>
-            </el-main>
+            <el-table ref="multipleTableRef" :data="cartInfo.cartList" style="width: 100%" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="55" />
+                <el-table-column label="商品信息">
+                    <template #default="{ row }">
+                        <div style="display: flex; justify-content: flex-start; align-items: left;flex-direction: column;">
+                            <img :src="row.imgUrl" alt="" width="100"/>
+                            <p>{{ row.describe }}</p>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="单价">
+                    <template #default="{ row }">
+                        <span>￥ {{ row.price }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column property="count" label="数量" show-overflow-tooltip />
+                <el-table-column  label="金额" show-overflow-tooltip>
+                    <template #default="{ row }">
+                        <span>￥{{ row.count * row.price }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" show-overflow-tooltip>
+                    <template #default="{ index }">
+                        <el-button type="danger" @click="handleDel(index)"> 删除 </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
         </el-container>
         <Footer />
     </div>
@@ -16,9 +40,21 @@ import Footer from '/@/layouts/frontend/components/footer.vue'
 
 import { onMounted, reactive } from 'vue'
 
+import { ref } from 'vue'
+import { ElTable } from 'element-plus'
+import { useCartInfo } from '/@/stores/cart'
+
+interface User {
+    date: string
+    name: string
+    address: string
+}
+const cartInfo = useCartInfo()
+const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 onMounted(() => {
     console.log('我是购物车页面')
 })
+const handleDel = (index: number) => {}
 </script>
 
 <style scoped lang="scss">

@@ -130,3 +130,12 @@ export interface ProductInfo {
         count: number;
     }>
 }
+export interface CartInfo {
+    cartList: Array<{
+        id:Number;
+        imgUrl: string;
+        price: Number;
+        describe: String;
+        count: number;
+    }>
+}

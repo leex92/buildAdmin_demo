@@ -1,6 +1,6 @@
 <template>
     <div class="product-container">
-        <img :src="GoodsImg" alt="" class="product-img" />
+        <img :src="info.imgUrl" alt="" class="product-img" />
         <div class="product-detail">
             <p class="price">￥{{ info.price }}</p>
             <p class="describe">{{ info.describe }}</p>
@@ -15,17 +15,22 @@
 <script setup lang="ts">
 import { onMounted } from '@vue/runtime-core'
 import GoodsImg from '/@/assets/product/product.jpg'
+import { useCartInfo } from '/@/stores/cart'
 
 interface ProductProps {
     info: {
-        url: string
+        id: number
+        imgUrl: string
         price: number
         describe: string
         count: number
     }
 }
 const props = defineProps<ProductProps>()
-const handleJoin = () => {}
+const cartInfo = useCartInfo()
+const handleJoin = () => {
+    cartInfo.cartList.push({ ...props.info, count: 1, imgUrl: props.info.imgUrl })
+}
 onMounted(() => {
     console.log(props)
 })
