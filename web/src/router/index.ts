@@ -15,6 +15,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    console.log('路由',to,from)
     NProgress.configure({ showSpinner: false })
     NProgress.start()
     if (!window.existLoading) {

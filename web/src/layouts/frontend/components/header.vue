@@ -11,6 +11,8 @@
                 </div>
                 <el-menu :default-active="state.activeMenu" class="frontend-header-menu" mode="horizontal" :ellipsis="false">
                     <el-menu-item @click="router.push({ name: '/' })" v-blur index="index">{{ $t('Home') }}</el-menu-item>
+                    <el-menu-item @click="router.push({ name: 'product' })" v-blur index="index">购物中心</el-menu-item>
+                    <el-menu-item @click="router.push({ name: 'cart' })" v-blur index="index">购物车</el-menu-item>
 
                     <template v-if="memberCenter.state.open">
                         <el-sub-menu v-if="userInfo.isLogin()" v-blur index="user">

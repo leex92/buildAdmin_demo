@@ -4,8 +4,9 @@
         <div class="product-detail">
             <p class="price">￥{{ info.price }}</p>
             <p class="describe">{{ info.describe }}</p>
+            <p class="count">剩余数量：{{ info.count }}</p>
             <div class="operation">
-                <el-button type="danger"> 加入购物车 </el-button>
+                <el-button type="danger" @click="handleJoin"> 加入购物车 </el-button>
             </div>
         </div>
     </div>
@@ -13,8 +14,8 @@
 
 <script setup lang="ts">
 import { onMounted } from '@vue/runtime-core'
-import { number } from 'echarts'
 import GoodsImg from '/@/assets/product/product.jpg'
+
 interface ProductProps {
     info: {
         url: string
@@ -24,6 +25,7 @@ interface ProductProps {
     }
 }
 const props = defineProps<ProductProps>()
+const handleJoin = () => {}
 onMounted(() => {
     console.log(props)
 })
@@ -55,6 +57,10 @@ onMounted(() => {
     .describe {
         margin-top: 10px;
         width: 100%;
+    }
+    .count {
+        margin-top: 10px;
+        color: lightgrey;
     }
     .operation {
         margin-top: 10px;

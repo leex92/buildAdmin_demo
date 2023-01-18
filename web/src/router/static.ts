@@ -28,11 +28,11 @@ const staticRoutes: Array<RouteRecordRaw> = [
     },
     {
         // 购物车
-        path: '/car',
-        name: 'car',
-        component: () => import('/@/views/frontend/car/index.vue'),
+        path: '/cart',
+        name: 'cart',
+        component: () => import('/@/views/frontend/cart/index.vue'),
         meta: {
-            title: pageTitle('product'),
+            title: pageTitle('cart'),
         },
     },
     {
