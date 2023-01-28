@@ -6,8 +6,8 @@
                 <el-table-column type="selection" width="55" />
                 <el-table-column label="商品信息">
                     <template #default="{ row }">
-                        <div style="display: flex; justify-content: flex-start; align-items: left;flex-direction: column;">
-                            <img :src="row.imgUrl" alt="" width="100"/>
+                        <div style="display: flex; justify-content: flex-start; align-items: left; flex-direction: column">
+                            <img :src="row.imgUrl" alt="" width="100" />
                             <p>{{ row.describe }}</p>
                         </div>
                     </template>
@@ -18,7 +18,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column property="count" label="数量" show-overflow-tooltip />
-                <el-table-column  label="金额" show-overflow-tooltip>
+                <el-table-column label="金额" show-overflow-tooltip>
                     <template #default="{ row }">
                         <span>￥{{ row.count * row.price }}</span>
                     </template>
@@ -43,7 +43,10 @@ import { onMounted, reactive } from 'vue'
 import { ref } from 'vue'
 import { ElTable } from 'element-plus'
 import { useCartInfo } from '/@/stores/cart'
-
+import { useRouter } from 'vue-router'
+import { useUserInfo } from '/@/stores/userInfo'
+const router = useRouter()
+const userInfo = useUserInfo()
 interface User {
     date: string
     name: string
@@ -53,6 +56,15 @@ const cartInfo = useCartInfo()
 const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 onMounted(() => {
     console.log('我是购物车页面')
+})
+onMounted(() => {
+    if (!userInfo.token)
+        return router.push({
+            path: '/user/login',
+            query: {
+                redirect: '/cart',
+            },
+        })
 })
 const handleDel = (index: number) => {}
 </script>

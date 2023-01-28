@@ -152,28 +152,6 @@ const memberCenterBaseRoute: RouteRecordRaw = {
         },
     ],
 }
-/*
- * 首页购物中心
- */
-// const memberShopBaseRoute: RouteRecordRaw = {
-//     path: '/product',
-//     name: 'product',
-//     component: () => import('/@/layouts/frontend/user.vue'),
-//     redirect: '/user/loading',
-//     meta: {
-//         title: pageTitle('User'),
-//     },
-//     children: [
-//         {
-//             path: 'loading/:to?',
-//             name: 'userMainLoading',
-//             component: () => import('/@/layouts/common/components/loading.vue'),
-//             meta: {
-//                 title: pageTitle('Loading'),
-//             },
-//         },
-//     ],
-// }
 
 staticRoutes.push(adminBaseRoute)
 staticRoutes.push(memberCenterBaseRoute)

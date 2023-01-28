@@ -417,6 +417,7 @@ const onChangeCaptcha = () => {
     state.form.captchaId = uuid()
 }
 const onSubmit = (formRef: FormInstance | undefined = undefined) => {
+    console.log(route, route.query.redirect)
     formRef!.validate((valid) => {
         if (valid) {
             state.formLoading = true
@@ -424,7 +425,8 @@ const onSubmit = (formRef: FormInstance | undefined = undefined) => {
                 .then((res) => {
                     state.formLoading = false
                     userInfo.dataFill(res.data.userInfo)
-                    router.push({ path: res.data.routePath })
+                    console.log('登录成功', userInfo)
+                    router.push({ path: route.query.redirect ? route.query.redirect : res.data.routePath })
                 })
                 .catch(() => {
                     state.formLoading = false

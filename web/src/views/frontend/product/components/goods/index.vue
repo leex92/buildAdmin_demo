@@ -16,9 +16,11 @@
 
 <script setup lang="ts">
 import { onMounted } from '@vue/runtime-core'
+import { useRouter } from 'vue-router'
 import GoodsImg from '/@/assets/product/product.jpg'
 import { useCartInfo } from '/@/stores/cart'
 import { useProductInfo } from '/@/stores/product'
+import { useUserInfo } from '/@/stores/userInfo'
 
 interface ProductProps {
     info: {
@@ -31,6 +33,7 @@ interface ProductProps {
 }
 const props = defineProps<ProductProps>()
 const cartInfo = useCartInfo()
+
 const productInfo = useProductInfo()
 const handleJoin = () => {
     console.log('123123123123')
