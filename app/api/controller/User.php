@@ -8,10 +8,11 @@ use app\common\facade\Token;
 use app\common\controller\Frontend;
 use think\exception\ValidateException;
 use app\api\validate\User as UserValidate;
+use app\admin\model\User as UserModel;
 
 class User extends Frontend
 {
-    protected $noNeedLogin = ['checkIn', 'logout'];
+    protected $noNeedLogin = ['checkIn', 'logout', 'product'];
 
     protected $noNeedPermission = ['index'];
 
@@ -107,6 +108,14 @@ class User extends Frontend
             if ($refreshToken) Token::delete((string)$refreshToken);
             $this->auth->logout();
             $this->success();
+        }
+    }
+    public function product()
+    {
+        if ($this->request->isGet()) {
+            $User = new UserModel();
+            $res =  $User->getProduct();
+            $this->success('', $res);
         }
     }
 }

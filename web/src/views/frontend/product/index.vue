@@ -4,8 +4,8 @@
         <el-container class="container">
             <el-main class="main">
                 <div class="main-container">
-                    <template :key="item.id" v-for="item in productInfo.productList">
-                        <Goods :info="item"/>
+                    <template :key="item.id" v-for="item in product.list">
+                        <Goods :info="item" />
                     </template>
                 </div>
             </el-main>
@@ -20,9 +20,16 @@ import Footer from '/@/layouts/frontend/components/footer.vue'
 import Goods from './components/goods/index.vue'
 import { onMounted, reactive } from 'vue'
 import { useProductInfo } from '/@/stores/product'
-const productInfo = useProductInfo()
+import { getProduct } from '/@/api/frontend/user'
 
+const productInfo = useProductInfo()
+const product: { list: Array<any> } = reactive({
+    list: [],
+})
 onMounted(() => {
+    getProduct().then((res) => {
+        product.list = res.data
+    })
     console.log('我是商品页面 ', productInfo.productList)
 })
 </script>

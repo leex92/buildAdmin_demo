@@ -4,7 +4,7 @@ namespace app\admin\model;
 
 use ba\Random;
 use think\Model;
-
+use think\facade\Db;
 /**
  * User 模型
  * @controllerUrl 'userUser'
@@ -41,6 +41,11 @@ class User extends Model
         $salt   = Random::build('alnum', 16);
         $passwd = encrypt_password($newPassword, $salt);
         return $this->where(['id' => $uid])->update(['password' => $passwd, 'salt' => $salt]);
+    }
+
+    public function getProduct()
+    {
+        return Db::table('product')->select();
     }
 
     public function group()

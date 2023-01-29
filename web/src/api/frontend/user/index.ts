@@ -10,6 +10,12 @@ export function index() {
         method: 'get',
     })
 }
+export function getProduct() {
+    return createAxios({
+        url: controllerUrl + 'product',
+        method: 'get',
+    })
+}
 
 export function checkIn(method: 'get' | 'post', params: object = {}): ApiPromise {
     return createAxios({
